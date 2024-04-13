@@ -1,14 +1,29 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function TabTwoScreen() {
+  const [steps, setSteps] = useState(0);
+  const x = 0.1;
+  const y = 0.2;
+  const z = 0.3;
+
+  const handleToggle = () => {
+    setSteps((prevSteps) => prevSteps + 1);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <Text style={styles.text}>Accelerometer</Text>
+      <Text style={styles.staticText}>Values:</Text>
+      <Text style={styles.staticText}>x: {x}</Text>
+      <Text style={styles.staticText}>y: {y}</Text>
+      <Text style={styles.staticText}>z: {z}</Text>
+
+      <TouchableOpacity style={styles.button} onPress={handleToggle}>
+        <Text>Toggle</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.stepsText}>Steps: {steps}</Text>
     </View>
   );
 }
@@ -16,16 +31,28 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff"
   },
-  title: {
+  staticText: {
+    marginBottom: 10,
+    color: "#ccc"
+  },
+  text: {
     fontSize: 20,
-    fontWeight: 'bold',
+    marginBottom: 20,
+    color: "#ccc"
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  button: {
+    backgroundColor: "#eee",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  stepsText: {
+    marginTop: 20,
+    fontSize: 16,
   },
 });
